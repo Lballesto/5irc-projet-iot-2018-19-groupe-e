@@ -152,7 +152,7 @@ subnet 192.168.4.0 netmask 255.255.255.0 {
 ```
 - Vous dever maintenant pouvoir vous connecter au wifi et obtenir une ip via dhcp.
 
-## Etape 5 : Configuration du routage et du NAT permettant l'accès à internet
+## Etape 6 : Configuration du routage et du NAT permettant l'accès à internet
 Afin que les utilisateurs wifi puissent accéder à internet nous allons router leur paquets vers l'interface eth0 qui accéde à internet
 
 - Activer le forwarding :
