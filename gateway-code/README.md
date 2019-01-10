@@ -172,8 +172,29 @@ iptables -A FORWARD -i wlan0 -j ACCEPT
 iptables -A FORWARD -o wlan0 -j ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
+- Sauvegarder la conf iptables :
+```
+iptables-save > /etc/iptables.save
+```
+- Décommenter la ligne suivante dans le fichier /etc/network/interfaces
+```
+post-up iptables-restore < /etc/iptables.save
+```
+- Vérifier la configuration iptables en place :
+```
+root@beaglebone:~# iptables -L -t nat
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination
 
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
 
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
 
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination
+MASQUERADE  all  --  anywhere             anywhere
 
+```
 
