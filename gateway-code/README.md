@@ -152,7 +152,26 @@ subnet 192.168.4.0 netmask 255.255.255.0 {
 ```
 - Vous dever maintenant pouvoir vous connecter au wifi et obtenir une ip via dhcp.
 
+## Etape 5 : Configuration du routage et du NAT permettant l'accès à internet
+Afin que les utilisateurs wifi puissent accéder à internet nous allons router leur paquets vers l'interface eth0 qui accéde à internet
 
+- Activer le forwarding :
+- Editer le fichier /etc/sysctl.conf en modifiant en dé-commantant la ligne suivante :
+```
+net.ipv4.ip_forward=1
+```
+- Prise en compte de la modification :
+```
+sysctl -p
+```
+- Ajout des règles de forwarding et de NAT via iptables :
+```
+iptables -A FORWARD -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -j ACCEPT
+iptables -A FORWARD -i wlan0 -j ACCEPT
+iptables -A FORWARD -o wlan0 -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+```
 
 
 
