@@ -1,7 +1,7 @@
 # Configuration Passerelle - Cloud
 ```
-apt-get install pyhton-pip
-
+apt-get install python
+apt-get install python-pip
 pip install requests
 
 ```
