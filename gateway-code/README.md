@@ -15,7 +15,7 @@ wlan0     IEEE 802.11bgn  Mode:Master  Tx-Power=20 dBm
           Power Management:off
 ```
 ## Etape 2 : Configuration des interfaces réseaux :
-- vim /etc/network/interfaces :
+- Editer le fichier /etc/network/interfaces comme suit :
 ```
 auto lo
 iface lo inet loopback
@@ -56,6 +56,9 @@ apt-get install hostapd
 - Editer le fichier /etc/default/hostapd :
 ```
 vim /etc/default/hostapd
+```
+- Modifier la directive comme suit :
+```
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 ```
 - Créer le fichier /etc/hostapd/hostapd.conf :
@@ -106,7 +109,7 @@ ignore_broadcast_ssid=0
 eapol_key_index_workaround=0
 
 ```
-## Etape 3 : Démarrer le point d'accès wifi :
+## Etape 4 : Démarrer le point d'accès wifi :
 - Vérifier si le process "wpa_supplicant" tourne :
 ```
 root@beaglebone:~# ps -aux | grep wpa
@@ -125,6 +128,32 @@ Using interface wlan0 with hwaddr XX:XX:XX:XX:XX:XX and ssid "NOM_SSID"
 wlan0: interface state COUNTRY_UPDATE->ENABLED
 wlan0: AP-ENABLED
 ```
+## Etape 5 : Mise en place d'un serveur DHCP :
+- Installer les paquets DHCP server :
+```
+apt-get update
+apt-get install isc-dhcp-server
+```
+- Editer le fichier /etc/dhcp/dhcpd.conf :
+```
+vim /etc/dhcp/dhcpd.conf
+```
+- ajouter les lignes suivantes correspondant à votre plan IP
+```
+subnet 192.168.4.0 netmask 255.255.255.0 {
+  range 192.168.4.10 192.168.4.100;
+  option domain-name-servers 1.1.1.1;
+  option routers 192.168.4.1;
+}
+```
+- Redémarrer le service DHCP server :
+```
+/etc/init.d/isc-dhcp-server restart
+```
+- Vous dever maintenant pouvoir vous connecter au wifi et obtenir une ip via dhcp.
+
+
+
 
 
 
