@@ -9,7 +9,7 @@
 #root@beaglebone:~# lsusb
 Bus 001 Device 002: ID 0846:9030 NetGear, Inc. WNA1100 Wireless-N 150 [Atheros AR9271]
 
-#root@beaglebone:/home/debian# iwconfig
+#root@beaglebone:~# iwconfig
 wlan0     IEEE 802.11bgn  Mode:Master  Tx-Power=20 dBm
           Retry short limit:7   RTS thr:off   Fragment thr:off
           Power Management:off
